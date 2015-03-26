@@ -1,6 +1,9 @@
 .actionScriptProperties
 .flexLibProperties
+.flexProperties
 .project
 .settings/*
 .metadata
 .rar
+bin/*
+html-template/history/*

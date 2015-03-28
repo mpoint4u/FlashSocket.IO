@@ -2,7 +2,7 @@
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600"
-			   creationComplete="application1_creationCompleteHandler(event)">
+			   creationComplete="app_init(event)">
 	<s:layout>
 		<s:VerticalLayout />
 	</s:layout>
@@ -11,7 +11,9 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
-			import com.pnwrain.flashsocket.FlashSocket;		
+			import com.pnwrain.flashsocket.FlashSocket;
+			import com.pnwrain.flashsocket.events.FlashSocketEvent;
+			
 			import mx.events.FlexEvent;
 			
 			
@@ -21,11 +23,15 @@
 			
 			
 			// functions
-			protected function application1_creationCompleteHandler(event:FlexEvent):void
+			protected function app_init(event:FlexEvent):void
 			{
 				socket = new FlashSocket("localhost:10081");
 				// to be continued .. 
+				
+				// TODO  ...solve the EventDispatcher problem in the Flex app
+				
 			}
+
 		]]>
 	</fx:Script>
 	<s:Label id="status" />

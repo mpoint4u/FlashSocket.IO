@@ -3,6 +3,7 @@ package com.pnwrain.flashsocket
 	import com.adobe.serialization.json.JSON;
 	import com.jimisaacs.data.URL;
 	import com.pnwrain.flashsocket.events.FlashSocketEvent;
+	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.HTTPStatusEvent;
@@ -15,6 +16,7 @@ package com.pnwrain.flashsocket
 	import flash.net.URLRequestMethod;
 	import flash.system.Security;
 	import flash.utils.Timer;
+	
 	import socket.io.parser.Decoder;
 	import socket.io.parser.Encoder;
 	import socket.io.parser.Parser;
@@ -102,7 +104,9 @@ package com.pnwrain.flashsocket
 		protected function getConnectionUrl(httpProtocal:String, domain:String):String
 		{
 			var connectionUrl:String = httpProtocal + "://" + domain + "/socket.io/?EIO=2&time=" +
-				new Date().getTime() + _queryUrlSuffix.split("?").join("&");
+				//new Date().getTime() + _queryUrlSuffix.split("?").join("&");				
+				new Date().time + _queryUrlSuffix.split("?").join("&");
+	
 			// socket.io 1.0 starts with a polling transport and then upgrades later. It requires this to be set in the url.
 			connectionUrl += "&transport=polling"
 			return connectionUrl;

@@ -6,9 +6,6 @@
 	<s:layout>
 		<s:VerticalLayout />
 	</s:layout>
-	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
-	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
 			import com.pnwrain.flashsocket.FlashSocket;
@@ -16,25 +13,40 @@
 			
 			import mx.events.FlexEvent;
 			
+			private var socket:FlashSocket;
 			
-			// member vars			
-			[Bindable]
-			protected var socket:FlashSocket;
-			
-			
-			// functions
 			protected function application1_creationCompleteHandler(event:FlexEvent):void
 			{
-				socket = new FlashSocket("localhost:10081");
-				// to be continued .. 
-				
-				// TODO  ...solve the EventDispatcher problem in the Flex app
-				
+				socket = new FlashSocket("ws://192.168.0.3:8124/socket.io/flashsocket");
+				socket.addEventListener(FlashSocketEvent.MESSAGE, onMessage);
 			}
-
+			
+			protected function onMessage(event:FlashSocketEvent):void{
+				log.text += event.data + "\n";
+			}
+			
+			
+			protected function sendMessage_clickHandler(event:MouseEvent):void
+			{
+				socket.send(msg.text);
+				msg.text = "";
+			}
+			
 		]]>
 	</fx:Script>
-	<s:Label id="status" />
-	<s:Label id="glabel" />
-	<s:Button label="Button"/>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:Form defaultButton="{sendMessage}">
+		<s:FormItem label="Message">
+			<s:TextInput id="msg" />
+		</s:FormItem>
+		<s:FormItem>
+			<s:Button id="sendMessage" click="sendMessage_clickHandler(event)" />
+		</s:FormItem>
+	</s:Form>
+	<s:TextArea id="log">
+		
+	</s:TextArea>
 </s:Application>

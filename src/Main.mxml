@@ -13,11 +13,19 @@
 			
 			import mx.events.FlexEvent;
 			
-			private var socket:FlashSocket;
+			[Bindable]
+			protected var socket:FlashSocket;
 			
 			protected function application1_creationCompleteHandler(event:FlexEvent):void
 			{
-				socket = new FlashSocket("ws://192.168.0.3:8124/socket.io/flashsocket");
+				//socket = new FlashSocket("ws://192.168.0.3:8124/socket.io/flashsocket");
+				//socket = new FlashSocket("localhost:10081",null,null,0,null);
+				socket = new FlashSocket("localhost:3000");
+				// 				ws://localhost:3000/socket.io/?EIO=3&transport=websocket&sid=bh92UZhhSpLaI4loAABa
+				
+				//socket = new FlashSocket("ws://localhost:3000/socket.io/?EIO=3&transport=websocket&sid=bh92UZhhSpLaI4loAABa");
+				
+				
 				socket.addEventListener(FlashSocketEvent.MESSAGE, onMessage);
 			}
 			

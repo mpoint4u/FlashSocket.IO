@@ -14,16 +14,22 @@
 			import mx.events.FlexEvent;
 			
 			[Bindable]
-			protected var socket:FlashSocket;
+			//protected var socket:FlashSocket;
+			protected var socket:WebSocket;
+			protected var socketClient:Sprite;
+
 			
 			protected function application1_creationCompleteHandler(event:FlexEvent):void
 			{
+				socketClient = new WebSocketMain();
+				
 				//socket = new FlashSocket("ws://192.168.0.3:8124/socket.io/flashsocket");
 				//socket = new FlashSocket("localhost:10081",null,null,0,null);
-				socket = new FlashSocket("localhost:3000");
+				//socket = new FlashSocket("localhost:10081");
 				// 				ws://localhost:3000/socket.io/?EIO=3&transport=websocket&sid=bh92UZhhSpLaI4loAABa
 				
 				//socket = new FlashSocket("ws://localhost:3000/socket.io/?EIO=3&transport=websocket&sid=bh92UZhhSpLaI4loAABa");
+				socket = new WebSocket(socketClient,"localhost:10081", "ws");
 				
 				
 				socket.addEventListener(FlashSocketEvent.MESSAGE, onMessage);
